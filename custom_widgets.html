@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dojo Custom Widgets</title>
+		<script>
+			var dojoConfig = (function() {
+				var base = location.href.split("/");
+				base.pop();
+				base = base.join("/");
+				return {
+					async: true,
+					isDebug: true,
+					packages: [{
+						name: "js", location: base + "/js" }, {
+						name: "templates", location: base + "/templates"
+					}]
+				};
+			})();
+		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+		
+	</head>
+	<body>
+		<div id="personContainer"></div>
+		<script>
+			require(["dojo/dom", "js/personEntry", "dojo/domReady!"], function(dom, personEntry) {
+				var personContainer = dom.byId("personContainer");
+				for (i = 0; i < 5; i++) {
+					var widget = new personEntry({name: "George", bio: "A born hacker"});
+					widget.placeAt(personContainer);
+				}
+			});
+		</script>
+	</body>
+</html>

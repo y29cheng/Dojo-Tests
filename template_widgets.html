@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dojo Template Widgets</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+		<script>
+			require(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/myWidget.html"], function(declare, parser, ready, _WidgetBase, _TemplatedMixin, template) {
+				declare("myWidget", [_WidgetBase, _TemplatedMixin], {
+					templateString: template,
+					
+					turnRed: function() {
+						this.containerNode.style.color = "red";
+					},
+					turnBlack: function() {
+						this.containerNode.style.color = "Black";
+					}
+					
+				});
+				
+				ready(function() {
+					parser.parse();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div data-dojo-type="myWidget">
+			<p>This is an arbitrary text.</p>
+			<p>Lorem ipsum</p>
+		</div>	
+	</body>
+	

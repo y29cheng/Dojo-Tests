@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animate Target</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+	</head>
+	<body>
+		<h1>Swap Text</h1>
+		<button id="swap">swap</button>
+		<div id="outerContainer" style="width: 300px; height: 500px; position: absolute; left: 3px; top: 150px; background: gray;">
+			<div id="innerContainer1" style="width: 140px; height: 450px; position: absolute; left: 5px; top: 5px; background: white">1: Lorem ipsum</div>
+			<div id="innerContainer2" style="width: 140px; height: 450px; position: absolute; left: 150px; top: 5px; background: white">2: Lorem ipsum</div>
+		</div>
+		<script>
+			require(["dojo/_base/fx", "dojo/fx", "dojo/on", "dojo/dom-style", "dojo/dom", "dojo/domReady!"], function(baseFx, fx, on, domStyle, dom) {
+				function swapAction(node1, node2) {
+					var posn1 = parseInt(domStyle.get(node1, "left"));
+					var posn2 = parseInt(domStyle.get(node2, "left"));
+					
+					return moveNodes = fx.combine([
+						baseFx.animateProperty({
+							node: node1,
+							properties: { left: posn2 },
+							duration: 1200
+						}),
+						baseFx.animateProperty({
+							node: node2,
+							properties: { left: posn1 },
+							duration: 1200
+						})
+					]);
+				} 
+				var swapButton = dom.byId("swap"),
+					innerContainer1 = dom.byId("innerContainer1"),
+					innerContainer2 = dom.byId("innerContainer2");
+				on(swapButton, "click", function(e) {
+					swapAction(innerContainer1, innerContainer2).play();
+				});
+						
+			});
+		</script>
+	</body>
+</html> 
+	

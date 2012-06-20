@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animate Target</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+	</head>
+	<body>
+		<h1>Anim8 Target</h1>
+		<button id="expand">expand</button>
+		<button id="shrink">shrink</button>
+		<button id="hide">hide</button>
+		<button id="return">return</button>
+		<button id="drop">drop</button>
+		<button id="lift">lift</button>
+		<div id="anim8target" style="width: 100px; height: 100px; position: absolute; top: 100px; left: 500px; background: red;">Animate Target</div>
+		<script>
+			require(["dojo/_base/fx", "dojo/on", "dojo/fx/easing", "dojo/dom", "dojo/domReady!"], function(fx, on, easing, dom) {
+				var expandButton = dom.byId("expand"),
+					shrinkButton = dom.byId("shrink"),
+					hideButton = dom.byId("hide"),
+					returnButton = dom.byId("return"),
+					dropButton = dom.byId("drop"),
+					liftButton = dom.byId("lift"),
+					anim8Target = dom.byId("anim8target");
+				on(expandButton, "click", function(e) {
+					fx.animateProperty({
+						node: anim8Target,
+						properties: { width: 200 }
+					}).play();
+				});
+				on(shrinkButton, "click", function(e) {
+					fx.animateProperty({
+						node: anim8Target,
+						properties: { width: 100 }
+					}).play();
+				});
+				on(hideButton, "click", function(e) {
+					fx.animateProperty({
+						node: anim8Target,
+						properties: {
+							top: 150,
+							left: 0,
+							opacity: 0
+						},
+						duration: 500
+					}).play();
+				});
+				on(returnButton, "click", function(e) {
+					fx.animateProperty({
+						node: anim8Target,
+						properties: { 
+							top: 100,
+							left: 500,
+							opacity: 1
+						},
+						duration: 500
+					}).play();
+				});
+				on(dropButton, "click", function(e) {
+					fx.animateProperty({
+						easing: easing.bounceOut,
+						node: anim8Target,
+						properties: { top: 600 },
+						duration: 500
+					}).play();
+				});
+				on(liftButton, "click", function(e) {
+					fx.animateProperty({
+						node: anim8Target,
+						properties: { top: 100 },
+						duration: 500
+					}).play();
+				});
+						
+			});
+		</script>
+	</body>
+</html> 
+	
