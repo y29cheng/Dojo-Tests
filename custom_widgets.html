@@ -23,13 +23,17 @@
 	<body>
 		<div id="personContainer"></div>
 		<script>
-			require(["dojo/dom", "js/personEntry", "dojo/domReady!"], function(dom, personEntry) {
-				var personContainer = dom.byId("personContainer");
-				for (i = 0; i < 5; i++) {
-					var widget = new personEntry({name: "George", bio: "A born hacker"});
-					widget.placeAt(personContainer);
-				}
-				
+			require(["dojo/_base/xhr", "dojo/_base/array", "dojo/dom", "js/personEntry", "dojo/domReady!"], function(xhr, arrayUtil, dom, personEntry) {
+				var personContainer= dom.byId("personContainer");
+				var def = xhr.get({
+					url: "votes.json",
+					handleAs: "json"
+				});
+				def.then(function(votes) {
+					arrayUtil.forEach(votes, function(vote) {
+						var widget = new personEntry({ name: vote.owner, title: vote.title }).placeAt(personContainer);
+					});
+				});
 			});
 		</script>
 	</body>

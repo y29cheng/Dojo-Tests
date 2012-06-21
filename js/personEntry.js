@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 				templateString: template,
 				baseClass: "personEntry",
 				name: "No name",
-				bio: "No bio",
+				title: "No title",
 				baseBackgroundColor: "#fff",
 				mouseBackgroundColor: "#def",
 				constructor: function(args) {
@@ -20,16 +20,16 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 					}).play();
 				},
 				_expandNode: function() {
-					fx.wipeIn({ node: this.bioNode }).play();
+					fx.wipeIn({ node: this.titleNode }).play();
 				},
 				_shrinkNode: function() {
-					fx.wipeOut({ node: this.bioNode }).play();
+					fx.wipeOut({ node: this.titleNode }).play();
 				},
 				postCreate: function() {
 					var domNode = this.domNode;
 					
 					domStyle.set(domNode, "backgroundColor", this.baseBackgroundColor);
-					domStyle.set(this.bioNode, "height", "0");
+					domStyle.set(this.titleNode, "height", "0");
 					this.connect(domNode, "onmouseenter", function(e) {
 						this._changeBackgroundColor(this.mouseBackgroundColor);
 						this._expandNode();
