@@ -19,10 +19,6 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 						duration: 500
 					}).play();
 				},
-				setPersonalInfo: function(name, bio) {
-					if (name) this.name = name;
-					if (bio) this.bio = bio;
-				},
 				postCreate: function() {
 					var domNode = this.domNode;
 					
