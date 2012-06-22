@@ -31,7 +31,12 @@
 				});
 				def.then(function(votes) {
 					arrayUtil.forEach(votes, function(vote) {
-						var widget = new personEntry({ name: vote.owner, title: vote.title }).placeAt(personContainer);
+						var count = vote.choices;
+						var body = "";
+						for (i = 0; i < count; i++) {
+							body = body + "<p>" + vote["choice"+(i+1)] + "</p>";
+						} 
+						var widget = new personEntry({ name: vote.owner, title: vote.title, body: body }).placeAt(personContainer);
 					});
 				});
 			});

@@ -5,9 +5,10 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 				baseClass: "personEntry",
 				name: "No name",
 				title: "No title",
+				body: "No body",
 				baseBackgroundColor: "#fff",
 				mouseBackgroundColor: "#def",
-				titleHidden: "true",
+				contentHidden: "true",
 				constructor: function(args) {
 					declare.safeMixin(this, args);
 				},
@@ -21,19 +22,23 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 					}).play();
 				},
 				_clickOnNode: function() {
-					if (!this.titleHidden) {
-						fx.wipeIn({ node: this.titleNode }).play();
+					if (!this.contentHidden) {
+						fx.wipeIn({ node: this.contentNode }).play();
 					} else {
-						fx.wipeOut({ node: this.titleNode }).play();
+						fx.wipeOut({ node: this.contentNode }).play();
 					}
+				},
+				_setBodyContent: function(body) {
+					this.bodyNode.innerHTML = body;
 				},
 				postCreate: function() {
 					var domNode = this.domNode;
 					
 					domStyle.set(domNode, "backgroundColor", this.baseBackgroundColor);
-					domStyle.set(this.titleNode, "display", "none");
+					domStyle.set(this.contentNode, "display", "none");
+					this._setBodyContent(this.body);
 					this.connect(domNode, "click", function(e) {
-						this.titleHidden = !this.titleHidden;
+						this.contentHidden = !this.contentHidden;
 						this._clickOnNode();
 					});
 					this.connect(domNode, "onmouseover", function(e) {
