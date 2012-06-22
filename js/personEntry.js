@@ -7,6 +7,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 				title: "No title",
 				baseBackgroundColor: "#fff",
 				mouseBackgroundColor: "#def",
+				titleHidden: "true",
 				constructor: function(args) {
 					declare.safeMixin(this, args);
 				},
@@ -19,24 +20,27 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "doj
 						duration: 500
 					}).play();
 				},
-				_expandNode: function() {
-					fx.wipeIn({ node: this.titleNode }).play();
-				},
-				_shrinkNode: function() {
-					fx.wipeOut({ node: this.titleNode }).play();
+				_clickOnNode: function() {
+					if (!this.titleHidden) {
+						fx.wipeIn({ node: this.titleNode }).play();
+					} else {
+						fx.wipeOut({ node: this.titleNode }).play();
+					}
 				},
 				postCreate: function() {
 					var domNode = this.domNode;
 					
 					domStyle.set(domNode, "backgroundColor", this.baseBackgroundColor);
-					domStyle.set(this.titleNode, "height", "0");
-					this.connect(domNode, "onmouseenter", function(e) {
+					domStyle.set(this.titleNode, "display", "none");
+					this.connect(domNode, "click", function(e) {
+						this.titleHidden = !this.titleHidden;
+						this._clickOnNode();
+					});
+					this.connect(domNode, "onmouseover", function(e) {
 						this._changeBackgroundColor(this.mouseBackgroundColor);
-						this._expandNode();
 					});
 					this.connect(domNode, "onmouseleave", function(e) {
 						this._changeBackgroundColor(this.baseBackgroundColor);
-						this._shrinkNode();
 					});
 				}
 			});
