@@ -1,5 +1,5 @@
-define(["dojo/_base/declare", "dojo/parser", "dojo/ready", "dojo/_base/fx", "dojo/fx", "dojo/dom-style", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!templates/personWidget.html"], 
-		function(declare, parser, ready, baseFx, fx, domStyle, _WidgetBase, _TemplatedMixin, template) {
+define(["dojo/_base/declare", "dojo/_base/fx", "dojo/fx", "dojo/dom-style", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!templates/personWidget.html"], 
+		function(declare, baseFx, fx, domStyle, _WidgetBase, _TemplatedMixin, template) {
 			return declare([_WidgetBase, _TemplatedMixin], {
 				templateString: template,
 				baseClass: "personEntry",

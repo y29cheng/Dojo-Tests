@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Templated Panel Dropdown</title>
+		<script>
+			var dojoConfig = (function() {
+				var base = location.href.split("/");
+				base.pop();
+				base = base.join("/");
+				return {
+					async: true,
+					isDebug: true,
+					packages: [{
+						name: "js", location: base + "/js" }, {
+						name: "templates", location: base + "/templates" }]
+				};
+			})();
+		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+	</head>
+	<body>
+		
