@@ -41,7 +41,7 @@ define(["dojo/_base/declare", "dojo/_base/fx", "dojo/fx", "dojo/dom-style", "dij
 						this.contentHidden = !this.contentHidden;
 						this._clickOnNode();
 					});
-					this.connect(domNode, "onmouseover", function(e) {
+					this.connect(domNode, "onmouseenter", function(e) {
 						this._changeBackgroundColor(this.mouseBackgroundColor);
 					});
 					this.connect(domNode, "onmouseleave", function(e) {

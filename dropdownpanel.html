@@ -17,6 +17,26 @@
 			})();
 		</script>
 		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true"></script>
+		<style>
+			.tabWidget { float: left; width: 100px; }
+		</style>
 	</head>
 	<body>
+		<div id="panelWidget"></div>
+		<script>
+			require(["dojo/_base/xhr", "dojo/_base/array", "dojo/dom", "js/tabWidget", "dojo/domReady!"], function(xhr, arrayUtil, dom, tabWidget) {
+				var panelWidget = dom.byId("panelWidget");
+				var def = xhr.get({
+					url: "menu.json",
+					handleAs: "json"
+				});
+				def.then(function(menus) {
+					arrayUtil.forEach(menus, function(menu) {
+						var widget = new tabWidget({ tabName: menu.menuName, menuItems: menu.menuItems}).placeAt(panelWidget);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
 		
